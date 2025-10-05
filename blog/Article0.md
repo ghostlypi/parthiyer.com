@@ -3,7 +3,9 @@
 <details>
 <summary>Description</summary>
 1. What this blog is about
+</br>
 2. What I'm working on
+</br>
 3. What to expect Soon™.
 </details>
 
