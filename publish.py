@@ -156,7 +156,7 @@ footer = '''
 
 page += footer
 
-with open("blog.html", "w") as file:
+with open("html/blog.html", "w") as file:
     file.write(page)
 
 subprocess.run(['git', 'add','-A']);
