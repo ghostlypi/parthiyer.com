@@ -117,7 +117,7 @@ for article in articles:
         page += f'''
                 <a href="{link}"><div class="blog-card">
                     <h2 style="text-align: center;">{title}</h2>
-                    <p>{description}</p>
+                    <p style="padding-left: 20px;">{description}</p>
                 </div></a>'''
 
 footer = '''
