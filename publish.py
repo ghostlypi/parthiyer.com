@@ -79,7 +79,7 @@ for article in articles:
     </div>
 </nav>
 <div class="container">
-    <div class="section-frame">
+    <div class="section-frame"; style="text-align: left;">
         {markdown.markdown(text)}
     </div>
     <section id="socials" class="section-frame">
