@@ -115,7 +115,7 @@ for article in articles:
         h.write(html)
         h.close()
         page += f'''
-                <a href="{link}"><div class="blog-card">
+                <a href="{link}"><div class="blog-card"; style="text-align: center;">
                     <h2>{title}</h2>
                     <p>{description}</p>
                 </div></a>'''
