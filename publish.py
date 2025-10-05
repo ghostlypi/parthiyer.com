@@ -14,16 +14,16 @@ header = '''<!DOCTYPE html>
 <body>
     <nav>
         <div class="nav-container">
-            <a href="index.html" class="logo-title-link">
+            <a href="../index.html" class="logo-title-link">
                 <div class="logo-title">
-                    <img src="images/Gpi.png" alt="Logo" class="logo">
+                    <img src="../images/Gpi.png" alt="Logo" class="logo">
                     <span class="site-title">Parth Iyer</span>
                 </div>
             </a>
             <ul>
-                <li><a href="index.html#about">About</a></li>
-                <li><a href="index.html#gallery">Gallery</a></li>
-                <li><a href="index.html#socials">Socials</a></li>
+                <li><a href="../index.html#about">About</a></li>
+                <li><a href="../index.html#gallery">Gallery</a></li>
+                <li><a href="../index.html#socials">Socials</a></li>
                 <li><a href="blog.html">Blog</a></li>
             </ul>
         </div>
@@ -115,7 +115,7 @@ for article in articles:
         h.write(html)
         h.close()
         page += f'''
-                <a href="{link}"><div class="blog-card">
+                <a href="../{link}"><div class="blog-card">
                     <h2 style="text-align: center;">{title}</h2>
                     <p style="padding-left: 20px;">{description}</p>
                 </div></a>'''
