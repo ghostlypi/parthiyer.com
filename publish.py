@@ -10,6 +10,7 @@ header = '''<!DOCTYPE html>
     <title>Blog</title>
     <link rel="icon" href="images/favicon.png" type="image/png">
     <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="" id="theme-style">
 </head>
 <body>
     <nav>
@@ -25,6 +26,14 @@ header = '''<!DOCTYPE html>
                 <li><a href="../index.html#gallery">Gallery</a></li>
                 <li><a href="../index.html#socials">Socials</a></li>
                 <li><a href="blog.html">Blog</a></li>
+                <li>
+                    <div class="theme-switch-wrapper">
+                        <label class="theme-switch" for="checkbox">
+                            <input type="checkbox" id="checkbox" />
+                            <div class="slider round"></div>
+                        </label>
+                    </div>
+                </li>
             </ul>
         </div>
     </nav>
@@ -60,6 +69,7 @@ for article in articles:
     <title>{title}</title>
     <link rel="icon" href="images/favicon.png" type="image/png">
     <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="" id="theme-style">
 </head>
 <body>
 <nav>
@@ -75,6 +85,14 @@ for article in articles:
             <li><a href="../index.html#gallery">Gallery</a></li>
             <li><a href="../index.html#socials">Socials</a></li>
             <li><a href="../html/blog.html">Blog</a></li>
+            <li>
+                <div class="theme-switch-wrapper">
+                    <label class="theme-switch" for="checkbox">
+                        <input type="checkbox" id="checkbox" />
+                        <div class="slider round"></div>
+                    </label>
+                </div>
+            </li>
         </ul>
     </div>
 </nav>
@@ -109,6 +127,7 @@ for article in articles:
         </div>
     </section>
 </div>
+<script src="../js/theme.js"></script>
 </body>
 </html>'''
         h = open(link, "w")
@@ -151,6 +170,7 @@ footer = '''
             </div>
         </section>
     </div>
+    <script src="../js/theme.js"></script>
 </body>
 </html>'''
 
