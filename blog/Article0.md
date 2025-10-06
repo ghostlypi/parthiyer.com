@@ -15,7 +15,7 @@ If you have found your way here, welcome to my blog. I'm going to use this as an
 ramble about technology, and the things going on in my life (within reason). If I know you
 in real space, then you can check here to see what I'm up to, and you know how to get in touch.
 
-For those of you who are discovering me on webspace, come say hi in Bluesky or on Linkedin.
+For those of you who are discovering me on webspace, come say hi in Bluesky or on LinkedIn.
 As for the exact content you can expect in the coming posts: 
 1. I will share my thoughts on how it felt to vybe code this website, what I enjoyed and what caused self-inflicted hair
 loss
