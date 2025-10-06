@@ -1,4 +1,5 @@
 # Welcome to my Blog!
+<span style="color: grey;">Published: 2025-10-05</span>
 
 <details>
 <summary>Description</summary>

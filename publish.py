@@ -58,6 +58,10 @@ for path, subdirs, files in os.walk(root):
     for name in files:
         if name.endswith(".md"):
             articles.append(os.path.join(path, name))
+        elif name.endswith(".html"):
+            os.remove(os.path.join(path, name))
+
+articles = list(sorted(articles, key=lambda x: int(x[x.index('e')+1 : x.index(".md")]), reverse=True))
 
 page = header
 
@@ -67,6 +71,7 @@ for article in articles:
         title = text[text.index("#") + 2 : text.index("\n", text.index("#") + 2)]
         flag = "<details>\n<summary>Description</summary>\n"
         description = text[text.index(flag) + len(flag) : text.index("</details>", text.index(flag))][:-1]
+        date = text[text.index('<span style="color: grey;">'):text.index('</span>', text.index('<span style="color: grey;">'))]
         link = article[:-2] + "html"
         html = f'''<!DOCTYPE html>
 <html lang="en">
@@ -140,6 +145,7 @@ for article in articles:
                 </a>
             </div>
         </section>
+        <p style="text-align: center;">Copyright © 2025 Parth Iyer. All rights reserved.</p>
     </div>
     <div id="cookie-consent-popup">
         <p>This website uses cookies to remember your theme preference. By clicking "Accept", you agree to the use of cookies.</p>
@@ -155,6 +161,9 @@ for article in articles:
         page += f'''
                 <a href="../{link}"><div class="blog-card">
                     <h2 style="text-align: center;">{title}</h2>
+                    <div style="padding-left: 20px; text-align: center">
+                        <span style="color: grey;">{date}</span>
+                    </div>
                     <p style="padding-left: 20px;">{description}</p>
                 </div></a>'''
 
@@ -188,6 +197,7 @@ footer = '''
                 </a>
             </div>
         </section>
+        <p style="text-align: center;">Copyright © 2025 Parth Iyer. All rights reserved.</p>
     </div>
     <div id="cookie-consent-popup">
         <p>This website uses cookies to remember your theme preference. By clicking "Accept", you agree to the use of cookies.</p>
