@@ -177,7 +177,7 @@ for article in articles:
                     <div style="padding-left: 20px; text-align: center">
                         <span style="color: grey;">{date}</span>
                     </div>
-                    <p style="padding-left: 20px;">{description}</p>
+                    <p style="padding-left: 20px; padding-right: 20px">{description}</p>
                 </div></a>'''
 
 footer = '''

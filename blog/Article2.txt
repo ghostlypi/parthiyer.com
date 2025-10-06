@@ -1,0 +1,10 @@
+# Google DeepMind CodeMender
+<span style="color: grey;">Published: 2025-10-06</span>
+
+<details>
+<summary>Description</summary>
+CodeMender will change the way that we think about code security by detecting and patching existing and potentially new 
+vulnerabilities
+</details>
+
+Google's DeepMind has announced CodeMender, a model which uses Google's Gemini platform to identify and patch vulnerabilities

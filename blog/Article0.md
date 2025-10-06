@@ -10,7 +10,7 @@
 3. What to expect Soon™.
 </details>
 
-## A breif welcome
+## A brief welcome
 
 If you have found your way here, welcome to my blog. I'm going to use this as an outlet to
 ramble about technology, and the things going on in my life (within reason). If I know you
