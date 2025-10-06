@@ -8,8 +8,9 @@ header = '''<!DOCTYPE html>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Blog</title>
-    <link rel="icon" href="images/favicon.png" type="image/png">
+    <link rel="icon" href="../images/favicon.png" type="image/png">
     <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/cookie-consent.css">
     <link rel="stylesheet" href="" id="theme-style">
 </head>
 <body>
@@ -67,8 +68,9 @@ for article in articles:
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{title}</title>
-    <link rel="icon" href="images/favicon.png" type="image/png">
+    <link rel="icon" href="../images/favicon.png" type="image/png">
     <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/cookie-consent.css">
     <link rel="stylesheet" href="" id="theme-style">
 </head>
 <body>
