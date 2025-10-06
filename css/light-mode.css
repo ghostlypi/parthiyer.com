@@ -32,11 +32,3 @@ details {
 input:checked + .slider:before {
     background-color: #ff7f50;
 }
-
-a:link {
-    color: #00ad79;
-}
-
-a:visited {
-    color: #00ad79;
-}

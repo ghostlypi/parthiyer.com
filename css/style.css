@@ -219,11 +219,3 @@ input:not(:checked) + .slider .fa-sun {
         display: none;
     }
 }
-
-a:link {
-    color: #20c997;
-}
-
-a:visited {
-    color: #20c997;
-}
