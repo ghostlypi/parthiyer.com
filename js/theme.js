@@ -1,6 +1,9 @@
 document.addEventListener('DOMContentLoaded', () => {
     const themeSwitch = document.getElementById('checkbox');
     const themeStyle = document.getElementById('theme-style');
+    const cookieConsentPopup = document.getElementById('cookie-consent-popup');
+    const cookieAcceptBtn = document.getElementById('cookie-accept');
+    const cookieRejectBtn = document.getElementById('cookie-reject');
     const pathPrefix = window.location.pathname.includes('/html/') || window.location.pathname.includes('/blog/') ? '../' : '';
 
     function setCookie(name, value, days) {
@@ -36,21 +39,51 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Apply theme on page load
     const savedTheme = getCookie('theme');
-    if (savedTheme) {
+    if (getCookie('cookie_consent') === 'yes' && savedTheme) {
         applyTheme(savedTheme);
     } else {
         applyTheme('dark'); // Default theme
     }
 
+    // Show cookie consent popup
+    function showCookieConsent() {
+        cookieConsentPopup.style.display = 'block';
+    }
+
+    // Hide cookie consent popup
+    function hideCookieConsent() {
+        cookieConsentPopup.style.display = 'none';
+    }
+
+    // Event listener for accept button
+    cookieAcceptBtn.addEventListener('click', () => {
+        setCookie('cookie_consent', 'yes', 365);
+        applyTheme('light');
+        setCookie('theme', 'light', 365);
+        hideCookieConsent();
+    });
+
+    // Event listener for reject button
+    cookieRejectBtn.addEventListener('click', () => {
+        applyTheme('dark');
+        hideCookieConsent();
+    });
+
     // Add event listener to the theme switch
     if (themeSwitch) {
         themeSwitch.addEventListener('change', () => {
             if (themeSwitch.checked) {
-                applyTheme('light');
-                setCookie('theme', 'light', 365);
+                if (getCookie('cookie_consent') === 'yes') {
+                    applyTheme('light');
+                    setCookie('theme', 'light', 365);
+                } else {
+                    showCookieConsent();
+                }
             } else {
                 applyTheme('dark');
-                setCookie('theme', 'dark', 365);
+                if (getCookie('cookie_consent') === 'yes') {
+                    setCookie('theme', 'dark', 365);
+                }
             }
         });
     }

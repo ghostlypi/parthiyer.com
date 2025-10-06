@@ -11,6 +11,7 @@
     <meta property="og:url" content="https://ghostlypi.com/rush.html">
     <meta name="twitter:card" content="summary_large_image">
     <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/cookie-consent.css">
     <link rel="stylesheet" href="" id="theme-style">
 </head>
 <body>
@@ -72,17 +73,11 @@
             </div>
         </section>
     </div>
-    <script>
-        const themeSwitch = document.getElementById('checkbox');
-        const themeStyle = document.getElementById('theme-style');
-
-        themeSwitch.addEventListener('change', () => {
-            if (themeSwitch.checked) {
-                themeStyle.href = '../css/light-mode.css';
-            } else {
-                themeStyle.href = '';
-            }
-        });
-    </script>
+    <div id="cookie-consent-popup">
+        <p>This website uses cookies to remember your theme preference. By clicking "Accept", you agree to the use of cookies.</p>
+        <button id="cookie-accept">Accept</button>
+        <button id="cookie-reject">Reject</button>
+    </div>
+    <script src="../js/theme.js"></script>
 </body>
 </html>
