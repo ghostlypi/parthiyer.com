@@ -226,7 +226,8 @@ page += footer
 with open("html/blog.html", "w") as file:
     file.write(page)
 
-if (len(sys.argv) == 1):
-    subprocess.run(['git', 'add','-A']);
+if len(sys.argv) == 1:
+    subprocess.run(['git', 'add','-A'])
+    subprocess.run(['git', 'status'])
     subprocess.run(['git', 'commit','-m',f'"Published: {datetime.now().strftime("%Y-%m-%d-%H:%M:%S")}"'])
     subprocess.run(['git', 'push'])
