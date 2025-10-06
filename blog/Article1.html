@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Welcome to my Blog!</title>
+    <title>Baby's first vybe coding project</title>
     <link rel="icon" href="../images/favicon.png" type="image/png">
     <link rel="stylesheet" href="../css/style.css">
     <link rel="stylesheet" href="../css/cookie-consent.css">
@@ -42,45 +42,38 @@
     </nav>
     <div class="container">
         <div class="section-frame"; style="text-align: left;">
-            <h1>Welcome to my Blog!</h1>
-<p><span style="color: grey;">Published: 2025-10-05</span></p>
+            <h1>Baby's first vybe coding project</h1>
+<p><span style="color: grey;">Published: 2025-10-06</span></p>
 <details>
 <summary>Description</summary>
-1. What this blog is about
-</br>
-2. What I'm working on
-</br>
-3. What to expect Soon™.
+My thoughts on how it felt to vybe code my first website!
 </details>
 
-<h2>A breif welcome</h2>
-<p>If you have found your way here, welcome to my blog. I'm going to use this as an outlet to
-ramble about technology, and the things going on in my life (within reason). If I know you
-in real space, then you can check here to see what I'm up to, and you know how to get in touch.</p>
-<p>For those of you who are discovering me on webspace, come say hi in Bluesky or on LinkedIn.
-As for the exact content you can expect in the coming posts: 
-1. I will share my thoughts on how it felt to vybe code this website, what I enjoyed and what caused self-inflicted hair
-loss
-2. I'll talk about my tech stack with multi-platform linux, what I've figured out, and how I automate my setup
-3. You'll see a short post around any major CVEs that come up, especially if they are dangerous and have a large user 
-base that needs their software manually patched.
-4. Any requested takes (as long as they aren't too spicy)</p>
-<h2>What's going on right now:</h2>
-<ol>
-<li>I'm finishing up my undergrad, so there is a lot of change around the corner. I'll do my best to try and be good about
-writing but no promises (other than the CVEs)</li>
-<li>I've just done a web renovation, so the next thing on the list is getting a solid Matrix server going. I've got a 
-Raspberry Pi where I made the configurations, but that
-came out of an autonomous vehicle I was developing, so it seems to have a tired and kinda broken USB port.</li>
-<li>I'll be adopting a Framework 16 this December, so hopefully there will be some stuff to talk about w.r.t. that</li>
-<li>RSS &amp; JSS: I have to finish building my RSS and JSS (Json Feed) feed server designed, built and deployed. I think Java
-is a good start because it's easy.</li>
-<li>Revisiting Rush and PiScript: I have a shell and a scripting language that are both very incomplete and I'll write 
-about those as I engineer those. This is very much a to-do, but still!</li>
-</ol>
-<p>Hopefully you the reader are interested in at least one of the things I have talked about, and I'll do my best to get all
-this going in a timely manner. I also realized that I need to tag posts from this blog, so hopefully that will be visible
-soon™.</p>
+<p>Through the experience of vybe coding my website, a few things took me aback. First was how seamless the whole process was.
+Yes the prompts were very slow to process, but the quality of the output I received was overall surprisingly good. I was
+able to read and understand the HTML and CSS outputted, and I could use the AI prompts to learn how I could make changes to
+the style of my website myself. The AI assistant was able to turn me from a technical guy with a vision, into a technical
+guy with a website, without me having to spend hours crawling through documentation to understand how on earth CSS works.</p>
+<p>The core logic of my site is pretty simple: It's a static HTML website, with some Javascript for switching between
+light and dark mode. The blog is a markdown blog, which is rendered to HTML and inserted into template using a python
+publishing script. I am aware that many JS frameworks have been invented to allow doing this all in Javascript, but as a 
+backend developer, I wanted to use this experience to see if I can make something work with what I know and with
+the power of AI.</p>
+<p>The biggest surprise was how well gemini-cli (the tool which I chose to use on this endeavour) dealt with 
+HTML, and CSS. I wrote almost none of the HTML or CSS myself, and could really just see what it did and make small tweaks
+to match my preferred aesthetic. The second feat was the readability of the AI outputted code overall. Even the generated
+JS was not too difficult to put together, and the model was able to abstract away complex things like reading and writing
+cookies, so I was able to focus on the core logic of the applications (admittedly minimal) JS.</p>
+<p>The place where Gemini-CLI couldn't help was with rendering markdown into HTML for my blog. I was doing some web research
+to see if it was possible and I concluded that it would be possible to have done it with a Javascript script, replacing
+HTML on the page, however I deemed this much more complicated that doing some simple string concatenation in python and
+calling it a day. I also found that the JavaScript delivered by Gemini was not up to snuff, using extra cookies and URL
+parameters that were unnecessary, cluttering up a relatively simple task of just switching between light and dark modes.</p>
+<p>Overall, I'm pretty pleased with how this site turned out. I really like the aesthetic, and I believe that this product is
+far better than I could have delivered by myself. While I don't think that vybe coded programs are going to be ready for
+mass market products quite yet, I do see this benefiting small businesses who will be able to cobble together their websites
+and also for backend programmers like myself to put together a UI for an API or product that we create. It is definitely
+going to change where the value add is in the development pipeline.</p>
         </div>
         <section id="socials" class="section-frame">
             <h2>Social Media</h2>

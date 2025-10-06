@@ -1,6 +1,5 @@
+import os, subprocess, sys, markdown
 from datetime import datetime
-import markdown
-import os, subprocess
 
 header = '''<!DOCTYPE html>
 <html lang="en">
@@ -18,7 +17,7 @@ header = '''<!DOCTYPE html>
         <div class="nav-container">
             <a href="../index.html" class="logo-title-link">
                 <div class="logo-title">
-                    <img src="../images/Gpi.png" alt="Logo" class="logo">
+                    <img src="../images/favicon.png" alt="Logo" class="logo">
                     <span class="site-title">Parth Iyer</span>
                 </div>
             </a>
@@ -89,7 +88,7 @@ for article in articles:
         <div class="nav-container">
             <a href="../index.html" class="logo-title-link">
                 <div class="logo-title">
-                    <img src="../images/Gpi.png" alt="Logo" class="logo">
+                    <img src="../images/favicon.png" alt="Logo" class="logo">
                     <span class="site-title">Parth Iyer</span>
                 </div>
             </a>
@@ -213,6 +212,7 @@ page += footer
 with open("html/blog.html", "w") as file:
     file.write(page)
 
-subprocess.run(['git', 'add','-A']);
-subprocess.run(['git', 'commit','-m',f'"Published: {datetime.now().strftime("%Y-%m-%d-%H:%M:%S")}"'])
-subprocess.run(['git', 'push'])
+if (len(sys.argv) > 1):
+    subprocess.run(['git', 'add','-A']);
+    subprocess.run(['git', 'commit','-m',f'"Published: {datetime.now().strftime("%Y-%m-%d-%H:%M:%S")}"'])
+    subprocess.run(['git', 'push'])
