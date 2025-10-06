@@ -28,3 +28,7 @@ h1, h2, h3 {
 details {
     background-color: #e0e0e0;
 }
+
+input:checked + .slider:before {
+    background-color: #ff7f50;
+}

@@ -33,6 +33,7 @@ header = '''<!DOCTYPE html>
                             <input type="checkbox" id="checkbox" />
                             <div class="slider round"></div>
                         </label>
+                        <span class="tooltip-text">Switch Between light & dark mode!</span>
                     </div>
                 </li>
             </ul>
@@ -93,6 +94,7 @@ for article in articles:
                             <input type="checkbox" id="checkbox" />
                             <div class="slider round"></div>
                         </label>
+                        <span class="tooltip-text">Switch Between light & dark mode!</span>
                     </div>
                 </li>
             </ul>

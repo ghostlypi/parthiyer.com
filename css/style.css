@@ -88,6 +88,29 @@ summary {
 .theme-switch-wrapper {
     display: flex;
     align-items: center;
+    position: relative;
+}
+
+.theme-switch-wrapper .tooltip-text {
+    visibility: hidden;
+    width: 140px;
+    background-color: #555;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px 0;
+    position: absolute;
+    z-index: 1;
+    bottom: 125%;
+    left: 50%;
+    margin-left: -70px;
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+.theme-switch-wrapper:hover .tooltip-text {
+    visibility: visible;
+    opacity: 1;
 }
 
 .theme-switch {
@@ -113,7 +136,7 @@ summary {
 }
 
 .slider:before {
-    background-color: #f0f0f0;
+    background-color: #ff7f50;
     bottom: 4px;
     content: "";
     height: 16px;
@@ -129,7 +152,7 @@ input:checked + .slider {
 
 input:checked + .slider:before {
     transform: translateX(26px);
-    background-color: #2a2a2a;
+    background-color: #ff7f50;
 }
 
 .slider.round {
