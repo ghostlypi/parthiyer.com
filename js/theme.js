@@ -59,7 +59,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const urlParams = new URLSearchParams(window.location.search);
     const themeFromUrl = urlParams.get('theme');
-    const consentFromUrl = urlParams.get('cookie_consent');
     const hasCookieConsent = getCookie('theme') !== null;
     let currentTheme = 'dark';
 
@@ -76,7 +75,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function showCookieConsent() {
-        if (!hasCookieConsent && urlParams.get('cookie_consent') !== 'rejected') {
+        if (!hasCookieConsent && urlParams.get('theme') === null) {
             cookieConsentPopup.style.display = 'block';
         }
     }
@@ -89,10 +88,7 @@ document.addEventListener('DOMContentLoaded', () => {
         setCookie('theme', 'light', 365);
         applyTheme('light');
         hideCookieConsent();
-        
         const url = new URL(window.location);
-        url.searchParams.delete('theme');
-        url.searchParams.delete('cookie_consent');
         history.replaceState({}, '', url.toString());
     });
 
