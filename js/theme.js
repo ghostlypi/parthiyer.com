@@ -37,7 +37,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    function updateLinksWithThemeParams(theme, consentRejected) {
+    function updateLinksWithThemeParams(theme) {
         document.querySelectorAll('a[href]').forEach(link => {
             try {
                 if (link.hostname === window.location.hostname || !link.hostname) {
@@ -46,13 +46,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     if (theme === 'light') {
                         url.searchParams.set('theme', 'light');
                     } else {
-                        url.searchParams.delete('theme');
-                    }
-
-                    if (consentRejected) {
-                        url.searchParams.set('cookie_consent', 'rejected');
-                    } else {
-                        url.searchParams.delete('cookie_consent');
+                        url.searchParams.set('theme', 'dark');
                     }
                     
                     link.href = url.toString();
@@ -66,7 +60,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const urlParams = new URLSearchParams(window.location.search);
     const themeFromUrl = urlParams.get('theme');
     const consentFromUrl = urlParams.get('cookie_consent');
-    const hasCookieConsent = getCookie('cookie_consent') === 'yes';
+    const hasCookieConsent = getCookie('theme') !== null;
     let currentTheme = 'dark';
 
     if (hasCookieConsent) {
@@ -78,7 +72,7 @@ document.addEventListener('DOMContentLoaded', () => {
     applyTheme(currentTheme);
 
     if (!hasCookieConsent) {
-        updateLinksWithThemeParams(currentTheme, consentFromUrl === 'rejected');
+        updateLinksWithThemeParams(currentTheme);
     }
 
     function showCookieConsent() {
@@ -92,7 +86,6 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     cookieAcceptBtn.addEventListener('click', () => {
-        setCookie('cookie_consent', 'yes', 365);
         setCookie('theme', 'light', 365);
         applyTheme('light');
         hideCookieConsent();
@@ -101,26 +94,23 @@ document.addEventListener('DOMContentLoaded', () => {
         url.searchParams.delete('theme');
         url.searchParams.delete('cookie_consent');
         history.replaceState({}, '', url.toString());
-        updateLinksWithThemeParams(null, false);
     });
 
     cookieRejectBtn.addEventListener('click', () => {
         hideCookieConsent();
         applyTheme('light');
-        
         const url = new URL(window.location);
         url.searchParams.set('theme', 'light');
-        url.searchParams.set('cookie_consent', 'rejected');
         history.replaceState({}, '', url.toString());
-        updateLinksWithThemeParams('light', true);
+        updateLinksWithThemeParams('light');
     });
 
     if (themeSwitch) {
         themeSwitch.addEventListener('change', () => {
             const newTheme = themeSwitch.checked ? 'light' : 'dark';
-            const consentRejected = new URLSearchParams(window.location.search).get('cookie_consent') === 'rejected';
+            const consentRejected = new URLSearchParams(window.location.search).get('theme') !== null;
 
-            if (getCookie('cookie_consent') === 'yes') {
+            if (getCookie('theme') !== null) {
                 applyTheme(newTheme);
                 setCookie('theme', newTheme, 365);
             } else {
@@ -133,10 +123,10 @@ document.addEventListener('DOMContentLoaded', () => {
                     if (newTheme === 'light') {
                         url.searchParams.set('theme', 'light');
                     } else {
-                        url.searchParams.delete('theme');
+                        url.searchParams.set('theme', 'dark');
                     }
                     history.replaceState({}, '', url.toString());
-                    updateLinksWithThemeParams(newTheme, consentRejected);
+                    updateLinksWithThemeParams(newTheme);
                 }
             }
         });
