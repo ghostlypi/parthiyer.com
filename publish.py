@@ -31,10 +31,15 @@ header = '''<!DOCTYPE html>
                     <div class="theme-switch-wrapper">
                         <label class="theme-switch" for="checkbox">
                             <input type="checkbox" id="checkbox" />
-                            <div class="slider round"></div>
+                            <div class="slider round">
+                                <div class="slider-icons">
+                                    <i class="fa-solid fa-sun"></i>
+                                    <i class="fa-solid fa-moon"></i>
+                                </div>
+                            </div>
                         </label>
-                        <span class="tooltip-text">Switch Between light & dark mode!</span>
                     </div>
+                    <span class="tooltip-text">Switch Between light & dark mode!</span>
                 </li>
             </ul>
         </div>
@@ -92,10 +97,15 @@ for article in articles:
                     <div class="theme-switch-wrapper">
                         <label class="theme-switch" for="checkbox">
                             <input type="checkbox" id="checkbox" />
-                            <div class="slider round"></div>
+                            <div class="slider round">
+                                <div class="slider-icons">
+                                    <i class="fa-solid fa-sun"></i>
+                                    <i class="fa-solid fa-moon"></i>
+                                </div>
+                            </div>
                         </label>
-                        <span class="tooltip-text">Switch Between light & dark mode!</span>
                     </div>
+                    <span class="tooltip-text">Switch Between light & dark mode!</span>
                 </li>
             </ul>
         </div>
