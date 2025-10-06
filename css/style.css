@@ -197,3 +197,13 @@ input:not(:checked) + .slider .fa-moon {
 input:not(:checked) + .slider .fa-sun {
     color: #2a2a2a;
 }
+
+.profile-picture {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 20px;
+    border: 3px solid #ff7f50;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+}
