@@ -207,3 +207,9 @@ input:not(:checked) + .slider .fa-sun {
     border: 3px solid #ff7f50;
     box-shadow: 0 2px 5px rgba(0,0,0,0.3);
 }
+
+@media (max-width: 768px) {
+    .tooltip-text {
+        display: none;
+    }
+}
