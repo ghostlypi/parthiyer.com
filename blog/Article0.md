@@ -35,7 +35,8 @@ came out of an autonomous vehicle I was developing, so it seems to have a tired 
 is a good start because it's easy.
 5. Revisiting Rush and PiScript: I have a shell and a scripting language that are both very incomplete and I'll write 
 about those as I engineer those. This is very much a to-do, but still!
-</br>
+
+
 Hopefully you the reader are interested in at least one of the things I have talked about, and I'll do my best to get all
 this going in a timely manner. I also realized that I need to tag posts from this blog, so hopefully that will be visible
 soon™.
