@@ -179,13 +179,21 @@ input:checked + .slider:before {
 
 .slider-icons .fa-sun {
     position: relative;
-    left: -5px;
+    left: -3%;
 }
 
 input:checked + .slider .fa-sun {
     color: #ff7f50;
 }
 
+input:checked + .slider .fa-moon {
+    color: #f0f0f0;
+}
+
 input:not(:checked) + .slider .fa-moon {
     color: #ff7f50;
+}
+
+input:not(:checked) + .slider .fa-sun {
+    color: #2a2a2a;
 }
