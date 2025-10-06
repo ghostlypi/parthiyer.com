@@ -177,6 +177,11 @@ input:checked + .slider:before {
     transition: color 0.4s;
 }
 
+.slider-icons .fa-sun {
+    position: relative;
+    left: -5px;
+}
+
 input:checked + .slider .fa-sun {
     color: #ff7f50;
 }
