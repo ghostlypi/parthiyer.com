@@ -1,0 +1,14 @@
+[
+    {
+        "url": "blog/Article1.html",
+        "title": "Baby's first vybe coding project",
+        "date": "<span style=\"color: grey;\">Published: 2025-10-06",
+        "preview": "My thoughts on how it felt to vybe code my first website!"
+    },
+    {
+        "url": "blog/Article0.html",
+        "title": "Welcome to my Blog!",
+        "date": "<span style=\"color: grey;\">Published: 2025-10-05",
+        "preview": "1. What this blog is about\n</br>\n2. What I'm working on\n</br>\n3. What to expect Soon\u2122."
+    }
+]

@@ -56,6 +56,9 @@ h1, h2, h3 { color: #f0f0f0; }
 
 #posts .gallery {
     justify-items: stretch;
+    max-height: 60vh;
+    overflow-y: auto;
+    padding-right: 10px;
 }
 
 .banner { max-width: 100%; height: auto; border-radius: 10px; margin-bottom: 20px; }

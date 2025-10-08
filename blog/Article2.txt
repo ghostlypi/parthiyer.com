@@ -1,10 +1,15 @@
-# Google DeepMind CodeMender
+# The quest to make an Alarm clock
 <span style="color: grey;">Published: 2025-10-06</span>
 
 <details>
 <summary>Description</summary>
-CodeMender will change the way that we think about code security by detecting and patching existing and potentially new 
-vulnerabilities
+Learn about the trials and trepidations of a Computer Scientist attempting to design hardware with a pinch of feature
+creep and a dash of "we'll fix it in software"
 </details>
 
-Google's DeepMind has announced CodeMender, a model which uses Google's Gemini platform to identify and patch vulnerabilities
+I like knowing what time it is &mdash to an extreme level of precision. The one thing that bugs me about my living room
+clock is that I have to keep setting it to the correct time. Naturally, the solution to this is to develop a clock that
+gets its time from GPS. But then I got to thinking, if I have something that's already getting really precise time from
+GPS, why not share this information with other devices on my network!
+
+I had to learn how to put this thing together
