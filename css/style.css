@@ -1,5 +1,5 @@
 html { scroll-behavior: smooth; }
-body { font-family: 'SUSE', sans-serif; margin: 0; background-color: #1e1e1e; color: #f0f0f0; }
+body { font-family: 'SUSE', sans-serif; margin: 0; background-color: #1e1e1e; color: #f0f0f0; font-size: 18pt; }
 nav { background-color: #20c997; padding: 10px; position: sticky; top: 0; z-index: 1000; }
 .nav-container { display: flex; justify-content: space-between; align-items: center; max-width: 960px; margin: 0 auto; }
 .logo-title-link { text-decoration: none; }
@@ -13,6 +13,7 @@ nav ul li { display: inline-block; margin-left: 20px; position: relative; vertic
            font-optical-sizing: auto;
            font-weight: 100;
            font-style: normal;
+           font-size: 18pt;
 }
 nav a {
     color: black;
