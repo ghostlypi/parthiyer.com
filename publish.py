@@ -123,4 +123,4 @@ if len(sys.argv) == 1:
     print(subprocess.run(['git', 'add','-A'], capture_output=True, text=True).stdout)
     print(subprocess.run(['git', 'status'], capture_output=True, text=True).stdout)
     print(subprocess.run(['git', 'commit','-m',f'"Published: {datetime.now().strftime("%Y-%m-%d-%H:%M:%S")}"'], capture_output=True, text=True).stdout)
-    print(subprocess.run(['git', 'push'], capture_output=True, text=True).stderr)
+    print(subprocess.run(['git', 'push'], capture_output=True, text=True).stdout)
