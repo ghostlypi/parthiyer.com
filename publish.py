@@ -120,7 +120,7 @@ with open("blog/articles.json", "w") as file:
     file.write(json.dumps(cards, indent=4))
 
 if len(sys.argv) == 1:
-    subprocess.run(['git', 'add','-A'])
-    subprocess.run(['git', 'status'])
-    subprocess.run(['git', 'commit','-m',f'"Published: {datetime.now().strftime("%Y-%m-%d-%H:%M:%S")}"'])
-    subprocess.run(['git', 'push'])
+    print(subprocess.run(['git', 'add','-A'], capture_output=True, text=True).stdout)
+    print(subprocess.run(['git', 'status'], capture_output=True, text=True).stdout)
+    print(subprocess.run(['git', 'commit','-m',f'"Published: {datetime.now().strftime("%Y-%m-%d-%H:%M:%S")}"'], capture_output=True, text=True).stdout)
+    print(subprocess.run(['git', 'push'], capture_output=True, text=True).stdout)
