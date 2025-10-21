@@ -1,5 +1,11 @@
 [
     {
+        "url": "blog/Article2.html",
+        "title": "Thinking about redundancy to save operating costs",
+        "date": "<span style=\"color: grey;\">Published: 2025-10-20",
+        "preview": "Discussing Hybrid Cloud as a solution to Cloud Outages and a way to keep costs under control."
+    },
+    {
         "url": "blog/Article1.html",
         "title": "Baby's first vybe coding project",
         "date": "<span style=\"color: grey;\">Published: 2025-10-06",
