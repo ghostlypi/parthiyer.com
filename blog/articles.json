@@ -1,5 +1,11 @@
 [
     {
+        "url": "blog/Article3.html",
+        "title": "Asahi Linux Year End Review",
+        "date": "<span style=\"color: grey;\">Published: 2025-10-28",
+        "preview": "My thoughts after 2 years daily driving Asahi Linux"
+    },
+    {
         "url": "blog/Article2.html",
         "title": "Thinking about redundancy to save operating costs",
         "date": "<span style=\"color: grey;\">Published: 2025-10-20",
