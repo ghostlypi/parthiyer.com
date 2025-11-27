@@ -1,5 +1,11 @@
 [
     {
+        "url": "blog/Article4.html",
+        "title": "Why Waymos are bad drivers",
+        "date": "<span style=\"color: grey;\">Published: 2025-11-27",
+        "preview": "I finally rode in a Waymo and learned why it is a bad driver. The speed wasn't the problem."
+    },
+    {
         "url": "blog/Article3.html",
         "title": "Asahi Linux Year End Review",
         "date": "<span style=\"color: grey;\">Published: 2025-10-28",
