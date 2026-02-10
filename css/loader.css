@@ -118,11 +118,6 @@
     animation: none;
 }
 
-@keyframes staticNoise {
-    0% { background-position: 0 0; }
-    100% { background-position: 100px 100px; }
-}
-
 /* Bubbles effect */
 .bubbles {
     position: absolute;

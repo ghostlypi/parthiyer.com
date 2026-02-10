@@ -30,9 +30,11 @@ document.addEventListener('DOMContentLoaded', () => {
     function applyTheme(theme) {
         if (theme === 'light') {
             themeStyle.href = pathPrefix + 'css/light-mode.css';
+            document.body.classList.add('light-mode');
             if (themeSwitch) themeSwitch.checked = true;
         } else {
             themeStyle.href = '';
+            document.body.classList.remove('light-mode');
             if (themeSwitch) themeSwitch.checked = false;
         }
     }
