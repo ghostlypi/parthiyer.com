@@ -182,100 +182,100 @@
 </head>
 <body>
 
-<div class="loader-container">
-    <div class="liquid" id="liquid">
-        <div class="bubbles" id="bubbles"></div>
+    <div class="loader-container">
+        <div class="liquid" id="liquid">
+            <div class="bubbles" id="bubbles"></div>
+        </div>
     </div>
-</div>
 
-<div class="controls">
-    <button onclick="startLoading()">Start Loading</button>
-    <button onclick="resetLoading()">Reset</button>
-</div>
+    <div class="controls">
+        <button onclick="startLoading()">Start Loading</button>
+        <button onclick="resetLoading()">Reset</button>
+    </div>
 
-<script>
-    const liquid = document.getElementById('liquid');
-    const bubblesContainer = document.getElementById('bubbles');
-    let progress = 10;
-    let interval;
-    let bubbleInterval;
+    <script>
+        const liquid = document.getElementById('liquid');
+        const bubblesContainer = document.getElementById('bubbles');
+        let progress = 10;
+        let interval;
+        let bubbleInterval;
 
-    function createBubble() {
-        const bubble = document.createElement('div');
-        bubble.classList.add('bubble');
+        function createBubble() {
+            const bubble = document.createElement('div');
+            bubble.classList.add('bubble');
 
-        const size = Math.random() * 6 + 3 + 'px';
-        bubble.style.width = size;
-        bubble.style.height = size;
+            const size = Math.random() * 6 + 3 + 'px';
+            bubble.style.width = size;
+            bubble.style.height = size;
 
-        // Random position within the liquid height
-        bubble.style.top = Math.random() * 90 + 5 + '%';
+            // Random position within the liquid height
+            bubble.style.top = Math.random() * 90 + 5 + '%';
 
-        bubble.style.animationDuration = (Math.random() * 1 + 0.5) + 's';
-        bubble.style.animationDelay = Math.random() * 0.2 + 's';
+            bubble.style.animationDuration = (Math.random() * 1 + 0.5) + 's';
+            bubble.style.animationDelay = Math.random() * 0.2 + 's';
 
-        bubblesContainer.appendChild(bubble);
+            bubblesContainer.appendChild(bubble);
 
-        // Remove bubble after animation
-        setTimeout(() => {
-            bubble.remove();
-        }, 2000);
-    }
+            // Remove bubble after animation
+            setTimeout(() => {
+                bubble.remove();
+            }, 2000);
+        }
 
-    function startBubbles() {
-        if (bubbleInterval) clearInterval(bubbleInterval);
-        bubbleInterval = setInterval(createBubble, 100);
-    }
+        function startBubbles() {
+            if (bubbleInterval) clearInterval(bubbleInterval);
+            bubbleInterval = setInterval(createBubble, 100);
+        }
 
-    function stopBubbles() {
-        if (bubbleInterval) clearInterval(bubbleInterval);
-    }
+        function stopBubbles() {
+            if (bubbleInterval) clearInterval(bubbleInterval);
+        }
 
-    function resetLoading() {
-        clearInterval(interval);
-        liquid.classList.remove('finished');
-        liquid.style.transition = 'width 0.5s ease-out';
-        progress = 10;
-        liquid.style.width = progress + '%';
+        function resetLoading() {
+            clearInterval(interval);
+            liquid.classList.remove('finished');
+            liquid.style.transition = 'width 0.5s ease-out';
+            progress = 10;
+            liquid.style.width = progress + '%';
+            startBubbles();
+        }
+
+        function startLoading() {
+            // Reset first to ensure clean state
+            clearInterval(interval);
+            liquid.classList.remove('finished');
+            liquid.style.transition = 'width 0.5s ease-out';
+            progress = 10;
+            liquid.style.width = progress + '%';
+
+            let elapsedTime = 0;
+            const totalWaitTime = 3000; // 3 seconds of waiting/boiling
+
+            interval = setInterval(() => {
+                elapsedTime += 100;
+
+                // Small fluctuation to look like it's boiling/alive
+                if (elapsedTime < totalWaitTime) {
+                    // Fluctuate between 10% and 15%
+                    const fluctuation = Math.sin(elapsedTime / 200) * 2;
+                    liquid.style.width = (12 + fluctuation) + '%';
+                } else {
+                    // Time's up, shoot to 100%
+                    clearInterval(interval);
+                    liquid.style.transition = 'width 0.4s cubic-bezier(0.1, 0.7, 1.0, 0.1)'; // Fast acceleration
+                    liquid.style.width = '100%';
+
+                    // Add finished class after transition completes (approx)
+                    setTimeout(() => {
+                        liquid.classList.add('finished');
+                    }, 400);
+                }
+            }, 100);
+        }
+
+        // Start bubbles initially
         startBubbles();
-    }
 
-    function startLoading() {
-        // Reset first to ensure clean state
-        clearInterval(interval);
-        liquid.classList.remove('finished');
-        liquid.style.transition = 'width 0.5s ease-out';
-        progress = 10;
-        liquid.style.width = progress + '%';
-
-        let elapsedTime = 0;
-        const totalWaitTime = 3000; // 3 seconds of waiting/boiling
-
-        interval = setInterval(() => {
-            elapsedTime += 100;
-
-            // Small fluctuation to look like it's boiling/alive
-            if (elapsedTime < totalWaitTime) {
-                // Fluctuate between 10% and 15%
-                const fluctuation = Math.sin(elapsedTime / 200) * 2;
-                liquid.style.width = (12 + fluctuation) + '%';
-            } else {
-                // Time's up, shoot to 100%
-                clearInterval(interval);
-                liquid.style.transition = 'width 0.4s cubic-bezier(0.1, 0.7, 1.0, 0.1)'; // Fast acceleration
-                liquid.style.width = '100%';
-
-                // Add finished class after transition completes (approx)
-                setTimeout(() => {
-                    liquid.classList.add('finished');
-                }, 400);
-            }
-        }, 100);
-    }
-
-    // Start bubbles initially
-    startBubbles();
-
-</script>
+    </script>
 </body>
 </html>
