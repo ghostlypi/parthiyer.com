@@ -1,5 +1,11 @@
 [
     {
+        "url": "blog/Article6.html",
+        "title": "Making File Transfers Fast in a Day",
+        "date": "<span style=\"color: grey;\">Published: 2026-01-08",
+        "preview": "I made a tool to speed up file transfers."
+    },
+    {
         "url": "blog/Article5.html",
         "title": "The biggest challenge to the AI bubble",
         "date": "<span style=\"color: grey;\">Published: 2025-12-08",
