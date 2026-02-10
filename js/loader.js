@@ -43,7 +43,7 @@ document.addEventListener("DOMContentLoaded", function() {
     const interval = setInterval(() => {
         // Increment progress randomly
         progress += Math.random() * 15;
-        if (progress > 90) progress = 90; // Cap at 90% until fully loaded
+        if (progress > 33) progress = 33; // Cap at 33% until fully loaded
 
         liquid.style.width = progress + '%';
     }, 200);
