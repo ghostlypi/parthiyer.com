@@ -62,6 +62,7 @@ document.addEventListener("DOMContentLoaded", function() {
             // Fade out loader
             setTimeout(() => {
                 loaderWrapper.classList.add('loaded');
+                document.dispatchEvent(new CustomEvent('loaderComplete'));
             }, 500);
         }, 400);
     });

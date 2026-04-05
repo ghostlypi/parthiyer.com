@@ -1,35 +1,86 @@
-#cookie-consent-popup {
+/* Full-page overlay — sits above content but below the loader (z-index 9999) */
+#consent-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(10, 10, 10, 0.94);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    z-index: 9990;
+    display: none;
+}
+
+#consent-overlay.active {
+    display: block;
+}
+
+/* Shared popup base */
+#cookie-consent-popup,
+#tnc-consent-popup {
     position: fixed;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
     background-color: #2a2a2a;
     color: #f0f0f0;
-    padding: 20px;
+    padding: 30px;
     border-radius: 15px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    z-index: 1000;
+    box-shadow: 0 6px 30px rgba(0, 0, 0, 0.7);
+    z-index: 9995;
     display: none;
     text-align: center;
     border: 1px solid #444;
+    max-width: 520px;
+    width: 90%;
+    max-height: 88vh;
+    overflow-y: auto;
+    box-sizing: border-box;
 }
 
-#cookie-consent-popup p {
-    margin-bottom: 20px;
+#cookie-consent-popup p,
+#tnc-consent-popup > p {
+    margin-bottom: 18px;
+    line-height: 1.6;
 }
 
-#cookie-consent-popup button {
+#tnc-consent-popup h2 {
+    margin-bottom: 16px;
+    font-size: 1.15em;
+    letter-spacing: 0.03em;
+}
+
+#tnc-consent-popup a,
+#tnc-consent-popup a:visited,
+#tnc-consent-popup a:hover,
+#tnc-consent-popup a:active {
+    color: #aaa;
+}
+
+/* Buttons */
+#cookie-consent-popup button,
+#tnc-consent-popup button {
     background: linear-gradient(135deg, #20c997 0%, #ff7f50 100%);
     color: #1e1e1e;
     border: none;
     border-radius: 8px;
-    padding: 10px 20px;
+    padding: 10px 24px;
     font-weight: bold;
     cursor: pointer;
     transition: filter 0.3s ease;
-    margin: 0 10px;
+    margin: 0 8px;
+    font-family: inherit;
+    font-size: 0.95em;
 }
 
-#cookie-consent-popup button:hover {
+#cookie-consent-popup button:hover,
+#tnc-consent-popup button:hover {
     filter: brightness(1.3);
+}
+
+/* Hide site content while consent is pending */
+body.consent-pending .container,
+body.consent-pending nav {
+    display: none;
 }

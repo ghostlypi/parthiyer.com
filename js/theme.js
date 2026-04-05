@@ -1,10 +1,9 @@
 document.addEventListener('DOMContentLoaded', () => {
     const themeSwitch = document.getElementById('checkbox');
     const themeStyle = document.getElementById('theme-style');
-    const cookieConsentPopup = document.getElementById('cookie-consent-popup');
-    const cookieAcceptBtn = document.getElementById('cookie-accept');
-    const cookieRejectBtn = document.getElementById('cookie-reject');
-    const pathPrefix = window.location.pathname.includes('/html/') || window.location.pathname.includes('/blog/') ? '../' : '';
+    const pathPrefix = (window.location.pathname.includes('/html/') ||
+                        window.location.pathname.includes('/blog/') ||
+                        window.location.pathname.includes('/policy/')) ? '../' : '';
 
     function setCookie(name, value, days) {
         let expires = "";
@@ -44,13 +43,7 @@ document.addEventListener('DOMContentLoaded', () => {
             try {
                 if (link.hostname === window.location.hostname || !link.hostname) {
                     const url = new URL(link.href, window.location.origin);
-                    
-                    if (theme === 'light') {
-                        url.searchParams.set('theme', 'light');
-                    } else {
-                        url.searchParams.set('theme', 'dark');
-                    }
-                    
+                    url.searchParams.set('theme', theme === 'light' ? 'light' : 'dark');
                     link.href = url.toString();
                 }
             } catch (e) {
@@ -61,7 +54,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const urlParams = new URLSearchParams(window.location.search);
     const themeFromUrl = urlParams.get('theme');
-    const hasCookieConsent = getCookie('theme') !== null;
+    // Cookies are usable if the user accepted cookie consent (new flag) or has legacy theme cookie
+    const hasCookieConsent = getCookie('cookie_consent') !== null || getCookie('theme') !== null;
     let currentTheme = 'dark';
 
     if (hasCookieConsent) {
@@ -69,63 +63,26 @@ document.addEventListener('DOMContentLoaded', () => {
     } else if (themeFromUrl) {
         currentTheme = themeFromUrl;
     }
-    
+
     applyTheme(currentTheme);
 
     if (!hasCookieConsent) {
         updateLinksWithThemeParams(currentTheme);
     }
 
-    function showCookieConsent() {
-        if (!hasCookieConsent && urlParams.get('theme') === null) {
-            cookieConsentPopup.style.display = 'block';
-        }
-    }
-
-    function hideCookieConsent() {
-        cookieConsentPopup.style.display = 'none';
-    }
-
-    cookieAcceptBtn.addEventListener('click', () => {
-        setCookie('theme', 'light', 365);
-        applyTheme('light');
-        hideCookieConsent();
-        const url = new URL(window.location);
-        history.replaceState({}, '', url.toString());
-    });
-
-    cookieRejectBtn.addEventListener('click', () => {
-        hideCookieConsent();
-        applyTheme('light');
-        const url = new URL(window.location);
-        url.searchParams.set('theme', 'light');
-        history.replaceState({}, '', url.toString());
-        updateLinksWithThemeParams('light');
-    });
-
     if (themeSwitch) {
         themeSwitch.addEventListener('change', () => {
             const newTheme = themeSwitch.checked ? 'light' : 'dark';
-            const consentRejected = new URLSearchParams(window.location.search).get('theme') !== null;
 
-            if (getCookie('theme') !== null) {
+            if (getCookie('cookie_consent') !== null || getCookie('theme') !== null) {
                 applyTheme(newTheme);
                 setCookie('theme', newTheme, 365);
             } else {
-                if (newTheme === 'light' && !consentRejected) {
-                    themeSwitch.checked = false;
-                    showCookieConsent();
-                } else {
-                    applyTheme(newTheme);
-                    const url = new URL(window.location);
-                    if (newTheme === 'light') {
-                        url.searchParams.set('theme', 'light');
-                    } else {
-                        url.searchParams.set('theme', 'dark');
-                    }
-                    history.replaceState({}, '', url.toString());
-                    updateLinksWithThemeParams(newTheme);
-                }
+                applyTheme(newTheme);
+                const url = new URL(window.location);
+                url.searchParams.set('theme', newTheme);
+                history.replaceState({}, '', url.toString());
+                updateLinksWithThemeParams(newTheme);
             }
         });
     }

@@ -223,3 +223,10 @@ input:not(:checked) + .slider .fa-sun {
         display: none;
     }
 }
+
+.container > p > a,
+.container > p > a:visited,
+.container > p > a:hover,
+.container > p > a:active {
+    color: #aaa;
+}

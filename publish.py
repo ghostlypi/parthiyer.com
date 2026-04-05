@@ -100,14 +100,11 @@ for article in articles:
                 </a>
             </div>
         </section>
-        <p style="text-align: center;">Copyright © 2025 Parth Iyer. All rights reserved.</p>
-    </div>
-    <div id="cookie-consent-popup">
-        <p>This website uses cookies to remember your theme preference. By clicking "Accept", you agree to the use of cookies.</p>
-        <button id="cookie-accept">Accept</button>
-        <button id="cookie-reject">Reject</button>
+        <p style="text-align: center;">Copyright &copy; 2025 Parth Iyer. All rights reserved.</p>
+        <p style="text-align: center;"><a href="../policy/tnc.html">Terms and Conditions</a></p>
     </div>
     <script src="../js/theme.js"></script>
+    <script src="../js/consent.js"></script>
 </body>
 </html>'''
         h = open(link, "w")
@@ -118,6 +115,76 @@ for article in articles:
 
 with open("blog/articles.json", "w") as file:
     file.write(json.dumps(cards, indent=4))
+
+# Policy pages — map markdown filename to output HTML filename
+POLICY_DIR = "policy"
+POLICY_MAP = {
+    'T&C.md': 'tnc.html',
+    'AI Guidelines.md': 'AI-Guidelines.html',
+}
+
+# Remove previously generated policy HTML (leave rejected.html alone)
+for name in os.listdir(POLICY_DIR):
+    if name.endswith('.html') and name not in ('rejected.html',):
+        os.remove(os.path.join(POLICY_DIR, name))
+
+for md_name, html_name in POLICY_MAP.items():
+    md_path = os.path.join(POLICY_DIR, md_name)
+    html_path = os.path.join(POLICY_DIR, html_name)
+    if not os.path.exists(md_path):
+        continue
+    with open(md_path, 'r') as f:
+        text = f.read()
+    # Derive page title from first non-empty line (strip leading # and trailing :)
+    title = next(
+        (line.lstrip('#').strip().rstrip(':') for line in text.splitlines() if line.strip()),
+        html_name
+    )
+    policy_html = f'''<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{title} — Parth Iyer</title>
+    <link rel="icon" href="../images/favicon.png" type="image/png">
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/loader.css">
+    <link rel="stylesheet" href="" id="theme-style">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=SUSE+Mono:ital,wght@0,100..800;1,100..800&family=SUSE:ital,wght@0,100..900;1,100..900&display=swap"
+          rel="stylesheet">
+</head>
+<body>
+    <div id="loader-wrapper">
+        <div class="loader-container">
+            <div class="liquid" id="liquid">
+                <div class="bubbles" id="bubbles"></div>
+            </div>
+        </div>
+    </div>
+    <nav>
+        <div class="nav-container">
+            <a href="../index.html" class="logo-title-link">
+                <div class="logo-title">
+                    <img src="../images/favicon.png" alt="Logo" class="logo">
+                    <span class="site-title">Parth Iyer</span>
+                </div>
+            </a>
+        </div>
+    </nav>
+    <div class="container">
+        <div class="section-frame" style="text-align: left;">
+            {markdown.markdown(text)}
+        </div>
+        <p><a href="../index.html">&larr; Back to Home</a></p>
+    </div>
+    <script src="../js/loader.js"></script>
+    <script src="../js/theme.js"></script>
+</body>
+</html>'''
+    with open(html_path, 'w') as f:
+        f.write(policy_html)
 
 if len(sys.argv) == 1:
     print(subprocess.run(['git', 'add','-A'], capture_output=True, text=True).stdout)
