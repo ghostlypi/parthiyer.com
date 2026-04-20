@@ -24,7 +24,7 @@ function appendArticles(page) {
             <div class="blog-card">
                 <h2 style="text-align: center;">${article.title}</h2>
                 <div style="padding-left: 20px; text-align: center">
-                    <span style="color: grey;">Published: ${article.date}</span>
+                    ${article.date}</span>
                 </div>
                 <p style="padding-left: 20px; padding-right: 20px">${article.preview}</p>
             </div>
@@ -56,10 +56,22 @@ fetch('../blog/articles.json')
         appendArticles(currentPage);
     });
 
-window.addEventListener('scroll', () => {
-    const { scrollTop, scrollHeight, clientHeight } = document.documentElement;
-
-    if (scrollTop + clientHeight >= scrollHeight - 100) {
-        loadMoreArticles();
+function setupScrollListener() {
+    if (document.body.classList.contains('vertical-tabs-mode')) {
+        const articlesEl = document.getElementById('articles');
+        articlesEl.addEventListener('scroll', () => {
+            if (articlesEl.scrollLeft + articlesEl.clientWidth >= articlesEl.scrollWidth - 100) {
+                loadMoreArticles();
+            }
+        });
+    } else {
+        window.addEventListener('scroll', () => {
+            const { scrollTop, scrollHeight, clientHeight } = document.documentElement;
+            if (scrollTop + clientHeight >= scrollHeight - 100) {
+                loadMoreArticles();
+            }
+        });
     }
-});
+}
+
+document.addEventListener('DOMContentLoaded', setupScrollListener);
