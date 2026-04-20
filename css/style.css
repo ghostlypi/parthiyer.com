@@ -232,5 +232,5 @@ input:not(:checked) + .slider .fa-sun {
 .container .footer-info p > a:visited,
 .container .footer-info p > a:hover,
 .container .footer-info p > a:active {
-    color: #aaa;
+    color: #aaa !important;
 }
