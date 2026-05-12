@@ -1,5 +1,11 @@
 [
     {
+        "url": "blog/Article7.html",
+        "title": "A computational analogy for the human brain",
+        "date": "<span style=\"color: grey;\">Published: 2026-04-20",
+        "preview": "A nice analogy to understand the human brain in the context of a computer."
+    },
+    {
         "url": "blog/Article6.html",
         "title": "Making File Transfers Fast in a Day",
         "date": "<span style=\"color: grey;\">Published: 2026-01-08",
