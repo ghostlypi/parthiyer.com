@@ -67,6 +67,72 @@ h1, h2, h3 { color: #f0f0f0; }
     color: #20c997;
 }
 
+/* Projects menu ("Currently Working On") */
+.projects-list { list-style: none; margin: 0; padding: 0; text-align: left; }
+.projects-list li { margin-bottom: 12px; }
+.projects-list li:last-child { margin-bottom: 0; }
+
+/* .project-item is applied to either a <div> (no link yet) or an <a> (linked) */
+.project-item {
+    display: block;
+    background-color: #333;
+    border-radius: 10px;
+    padding: 15px 18px;
+    transition: background-color 0.2s ease;
+}
+.projects-list a.project-item {
+    text-decoration: none;
+    color: inherit;
+}
+a.project-item:hover, a.project-item:focus-visible {
+    background-color: #3d3d3d;
+}
+a.project-item .project-name::after {
+    content: '\2192';
+    margin-left: 8px;
+    color: #20c997;
+}
+.project-item-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+.project-name { font-weight: bold; font-size: 1.05em; }
+.project-desc { margin: 8px 0 0; color: #ccc; font-size: 0.85em; }
+.status-tag {
+    display: inline-block;
+    font-size: 0.6em;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    padding: 4px 10px;
+    border-radius: 999px;
+    color: #1e1e1e;
+    white-space: nowrap;
+}
+.status-tag.status-in-progress { background-color: #20c997; }
+.status-tag.status-planning { background-color: #ff7f50; }
+
+/* Connect card (Social Media + Elsewhere subsections) */
+.connect-subsection { margin-bottom: 20px; }
+.connect-subsection:last-child { margin-bottom: 0; }
+.connect-subheading {
+    font-size: 0.7em;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: #aaa;
+    margin: 0 0 12px;
+    padding-top: 16px;
+    border-top: 1px solid #444;
+}
+.connect-subsection:first-child .connect-subheading {
+    border-top: none;
+    padding-top: 0;
+}
+
 /* Blog card styles */
 .blog-card {
     background-color: #333;
@@ -223,6 +289,88 @@ input:not(:checked) + .slider .fa-sun {
         display: none;
     }
 }
+
+/* SLA page: per-tier comparison cards */
+.sla-tiers {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 20px;
+    margin-top: 10px;
+    text-align: left;
+}
+.sla-tier {
+    background-color: #333;
+    border-radius: 12px;
+    border: 1px solid #444;
+    padding: 20px;
+    flex: 1 1 220px;
+    max-width: 280px;
+    box-sizing: border-box;
+    position: relative;
+}
+.sla-tier-featured {
+    border-color: #ff7f50;
+    box-shadow: 0 0 0 1px #ff7f50;
+}
+.sla-tier-badge {
+    position: absolute;
+    top: -12px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #ff7f50;
+    color: #1e1e1e;
+    font-size: 0.55em;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    padding: 4px 12px;
+    border-radius: 999px;
+    white-space: nowrap;
+}
+.sla-tier-name {
+    margin: 0 0 10px;
+    text-align: center;
+    font-size: 1em;
+}
+.sla-tier-stat {
+    text-align: center;
+    margin-bottom: 16px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid #444;
+}
+.sla-tier-stat .value {
+    display: block;
+    font-size: 1.8em;
+    font-weight: bold;
+    color: #20c997;
+}
+.sla-tier-stat .label {
+    display: block;
+    margin-top: 4px;
+    color: #aaa;
+    font-size: 0.55em;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+.sla-tier ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    font-size: 0.75em;
+}
+.sla-tier li {
+    display: grid;
+    grid-template-columns: 130px 1fr;
+    column-gap: 10px;
+    align-items: baseline;
+    padding: 7px 0;
+    border-top: 1px solid #3d3d3d;
+}
+.sla-tier li:first-child { border-top: none; padding-top: 0; }
+.sla-tier li span:first-child { color: #aaa; }
+.sla-tier li span:last-child { color: #f0f0f0; font-weight: bold; text-align: right; }
 
 .container > p > a,
 .container > p > a:visited,

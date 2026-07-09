@@ -29,6 +29,72 @@ details {
     background-color: #f0f0f0;
 }
 
+/* Projects menu */
+.project-item {
+    background-color: #e0e0e0;
+}
+
+a.project-item:hover, a.project-item:focus-visible {
+    background-color: #d5d5d5;
+}
+
+a.project-item .project-name::after {
+    color: #00ad79;
+}
+
+.project-desc {
+    color: #444;
+}
+
+.status-tag.status-in-progress {
+    background-color: #00ad79;
+}
+
+/* Connect card */
+.connect-subheading {
+    color: #555;
+    border-top-color: #ccc;
+}
+
+/* SLA tiers */
+.sla-tier {
+    background-color: #e0e0e0;
+    border-color: #ccc;
+}
+
+.sla-tier-featured {
+    border-color: #ff7f50;
+    box-shadow: 0 0 0 1px #ff7f50;
+}
+
+.sla-tier-badge {
+    background-color: #ff7f50;
+}
+
+.sla-tier-stat {
+    border-bottom-color: #ccc;
+}
+
+.sla-tier-stat .value {
+    color: #00ad79;
+}
+
+.sla-tier-stat .label {
+    color: #555;
+}
+
+.sla-tier li {
+    border-top-color: #ccc;
+}
+
+.sla-tier li span:first-child {
+    color: #555;
+}
+
+.sla-tier li span:last-child {
+    color: #1e1e1e;
+}
+
 input:checked + .slider:before {
     background-color: #ff7f50;
 }
