@@ -149,7 +149,11 @@
         if (document.readyState === 'complete') finishLoading();
     }
 
-    if (document.readyState === 'loading') {
+    // The inline copy runs immediately after the loader placeholder, before
+    // the rest of the document, stylesheets, fonts, and images finish loading.
+    if (document.getElementById('loader-wrapper')) {
+        initLoader();
+    } else if (document.readyState === 'loading') {
         document.addEventListener('DOMContentLoaded', initLoader, { once: true });
     } else {
         initLoader();

@@ -186,6 +186,9 @@ for md_name, html_name in POLICY_MAP.items():
     with open(html_path, 'w') as f:
         f.write(policy_html)
 
+from sync_loader import sync_pages
+sync_pages()
+
 if len(sys.argv) == 1:
     print(subprocess.run(['git', 'add','-A'], capture_output=True, text=True).stdout)
     print(subprocess.run(['git', 'status'], capture_output=True, text=True).stdout)
