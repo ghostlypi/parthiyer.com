@@ -164,6 +164,8 @@
 
     // Fallback in case there is no loader on this page
     window.addEventListener('load', () => {
-        setTimeout(() => { if (!loaderFired) startConsentFlow(); }, 1100);
+        if (!document.getElementById('loader-wrapper')) {
+            setTimeout(() => { if (!loaderFired) startConsentFlow(); }, 1100);
+        }
     });
 })();
