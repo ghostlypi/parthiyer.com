@@ -1,7 +1,7 @@
 {
   "name": "Parth Iyer",
   "framework": {
-    "path": "../site-framework"
+    "path": "../coralfw"
   },
   "build": {
     "output": "dist",
