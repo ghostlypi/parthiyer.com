@@ -1,89 +1,88 @@
-document.addEventListener('DOMContentLoaded', () => {
-    const themeSwitch = document.getElementById('checkbox');
-    const themeStyle = document.getElementById('theme-style');
-    const pathPrefix = (window.location.pathname.includes('/html/') ||
-                        window.location.pathname.includes('/blog/') ||
-                        window.location.pathname.includes('/policy/')) ? '../' : '';
+(() => {
+    // Resolve from this asset, so root pages and nested pages use the same code.
+    const stylesheet = new URL('../css/light-mode.css', document.currentScript.src).href;
 
-    function setCookie(name, value, days) {
-        let expires = "";
-        if (days) {
-            const date = new Date();
-            date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
-            expires = "; expires=" + date.toUTCString();
+    document.addEventListener('DOMContentLoaded', () => {
+        const themeSwitch = document.getElementById('checkbox');
+        const themeStyle = document.getElementById('theme-style');
+        if (!themeStyle) return;
+        const popup = document.getElementById('cookie-consent-popup');
+        // The main site's consent controller owns its own popup and buttons.
+        const ownsPopup = popup && !document.getElementById('consent-overlay');
+        const urlParams = new URLSearchParams(window.location.search);
+        const normalize = theme => theme === 'light' ? 'light' : 'dark';
+
+        function getCookie(name) {
+            const cookie = document.cookie.split(';').map(value => value.trim())
+                .find(value => value.startsWith(name + '='));
+            return cookie ? cookie.slice(name.length + 1) : null;
         }
-        document.cookie = name + "=" + (value || "") + expires + "; path=/; SameSite=Strict; Secure";
-    }
 
-    function getCookie(name) {
-        const nameEQ = name + "=";
-        const ca = document.cookie.split(';');
-        for (let i = 0; i < ca.length; i++) {
-            let c = ca[i];
-            while (c.charAt(0) == ' ') c = c.substring(1, c.length);
-            if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length, c.length);
+        function canRemember() {
+            return getCookie('cookie_consent') === 'true' || getCookie('theme') !== null;
         }
-        return null;
-    }
 
-    function applyTheme(theme) {
-        if (theme === 'light') {
-            themeStyle.href = pathPrefix + 'css/light-mode.css';
-            document.body.classList.add('light-mode');
-            if (themeSwitch) themeSwitch.checked = true;
-        } else {
-            themeStyle.href = '';
-            document.body.classList.remove('light-mode');
-            if (themeSwitch) themeSwitch.checked = false;
+        function setCookie(name, value) {
+            const expires = new Date(Date.now() + 365 * 86400000).toUTCString();
+            const secure = window.location.protocol === 'https:' ? '; Secure' : '';
+            document.cookie = `${name}=${value}; expires=${expires}; path=/; SameSite=Strict${secure}`;
         }
-    }
 
-    function updateLinksWithThemeParams(theme) {
-        document.querySelectorAll('a[href]').forEach(link => {
-            try {
-                if (link.hostname === window.location.hostname || !link.hostname) {
-                    const url = new URL(link.href, window.location.origin);
-                    url.searchParams.set('theme', theme === 'light' ? 'light' : 'dark');
-                    link.href = url.toString();
-                }
-            } catch (e) {
-                console.error("Could not update link: " + link.href, e);
-            }
-        });
-    }
+        function updateLinks(theme) {
+            document.querySelectorAll('a[href]').forEach(link => {
+                const href = link.getAttribute('href');
+                if (!href || href.startsWith('#')) return;
+                const url = new URL(link.href, window.location.href);
+                if (url.origin !== window.location.origin || !/^https?:$/.test(url.protocol)) return;
+                url.searchParams.set('theme', theme);
+                link.href = url.href;
+            });
+        }
 
-    const urlParams = new URLSearchParams(window.location.search);
-    const themeFromUrl = urlParams.get('theme');
-    // Cookies are usable if the user accepted cookie consent (new flag) or has legacy theme cookie
-    const hasCookieConsent = getCookie('cookie_consent') !== null || getCookie('theme') !== null;
-    let currentTheme = 'dark';
-
-    if (hasCookieConsent) {
-        currentTheme = getCookie('theme') || 'dark';
-    } else if (themeFromUrl) {
-        currentTheme = themeFromUrl;
-    }
-
-    applyTheme(currentTheme);
-
-    if (!hasCookieConsent) {
-        updateLinksWithThemeParams(currentTheme);
-    }
-
-    if (themeSwitch) {
-        themeSwitch.addEventListener('change', () => {
-            const newTheme = themeSwitch.checked ? 'light' : 'dark';
-
-            if (getCookie('cookie_consent') !== null || getCookie('theme') !== null) {
-                applyTheme(newTheme);
-                setCookie('theme', newTheme, 365);
+        function applyTheme(theme) {
+            if (theme === 'light') {
+                themeStyle.href = stylesheet;
+                themeStyle.removeAttribute('media');
             } else {
-                applyTheme(newTheme);
-                const url = new URL(window.location);
-                url.searchParams.set('theme', newTheme);
-                history.replaceState({}, '', url.toString());
-                updateLinksWithThemeParams(newTheme);
+                themeStyle.removeAttribute('href');
+            }
+            document.body.classList.toggle('light-mode', theme === 'light');
+            if (themeSwitch) themeSwitch.checked = theme === 'light';
+        }
+
+        let currentTheme = normalize(canRemember() ? getCookie('theme') : urlParams.get('theme'));
+        applyTheme(currentTheme);
+        if (!canRemember()) updateLinks(currentTheme);
+
+        function setUrlTheme(theme) {
+            const url = new URL(window.location.href);
+            url.searchParams.set('theme', theme);
+            history.replaceState({}, '', url.href);
+            updateLinks(theme);
+        }
+
+        themeSwitch?.addEventListener('change', () => {
+            currentTheme = themeSwitch.checked ? 'light' : 'dark';
+            applyTheme(currentTheme);
+            if (canRemember()) {
+                setCookie('theme', currentTheme);
+            } else {
+                const offerRemember = ownsPopup && !new URLSearchParams(window.location.search).has('theme');
+                setUrlTheme(currentTheme);
+                if (offerRemember) popup.style.display = 'block';
             }
         });
-    }
-});
+
+        if (ownsPopup) {
+            document.getElementById('cookie-accept')?.addEventListener('click', () => {
+                setCookie('cookie_consent', 'true');
+                setCookie('theme', currentTheme);
+                popup.style.display = 'none';
+            });
+            document.getElementById('cookie-reject')?.addEventListener('click', () => {
+                setUrlTheme(currentTheme);
+                popup.style.display = 'none';
+            });
+        }
+    }, { once: true });
+})();

@@ -3,6 +3,8 @@
         const wrapper = document.getElementById('loader-wrapper');
         const container = wrapper?.querySelector('.loader-container');
         if (!container) return;
+        if (container.dataset.initialized) return;
+        container.dataset.initialized = 'true';
 
         // Shared markup keeps the ampule identical on every page using this loader.
         container.innerHTML = `<svg class="ampule" viewBox="0 0 840 260" aria-hidden="true">
@@ -79,14 +81,71 @@
         container.setAttribute('role', 'progressbar');
         container.setAttribute('aria-label', 'Loading page');
         container.setAttribute('aria-valuetext', 'Loading');
-        // Page loading has no reliable percentage: stay indeterminate until load.
         const part = name => container.querySelector(`#ampule-${name}`);
-        const fluid = part('supercritical');
+        const liquidShape = part('liquidShape');
         const meniscus = part('meniscus');
-        const bubbles = part('bubbles');
-        const cloud = part('cloud');
         const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
         const shownAt = performance.now();
+        let surfaceStrength = 1;
+        let surfaceFramePending = false;
+
+        function drawSurface(elapsed) {
+            // Pin the contact points to the glass and let two ripples travel
+            // along the interface. Both the liquid fill and its highlight use
+            // this exact curve, so the vapor never shows through a stray seam.
+            const segments = 16;
+            const phase = elapsed / 550;
+            function point(t) {
+                const envelope = Math.sin(Math.PI * t);
+                const wave = Math.sin(4 * Math.PI * t - phase);
+                const amplitude = 14 * surfaceStrength;
+                return {
+                    x: 420 + 6 * (2 * t - 1) ** 6 + amplitude * envelope * wave,
+                    y: 36 + 188 * t,
+                    slope: 72 * (2 * t - 1) ** 5 + amplitude * Math.PI * (
+                        Math.cos(Math.PI * t) * wave
+                        + 4 * envelope * Math.cos(4 * Math.PI * t - phase)
+                    ),
+                };
+            }
+            let boundary = 'M426 36';
+            let previous = point(0);
+            for (let i = 1; i <= segments; i++) {
+                const next = point(i / segments);
+                const step = 1 / (segments * 3);
+                boundary += ` C${previous.x + previous.slope * step} ${previous.y + 188 * step}`
+                    + ` ${next.x - next.slope * step} ${next.y - 188 * step} ${next.x} ${next.y}`;
+                previous = next;
+            }
+            liquidShape.setAttribute('d', `M0 36 H426${boundary.slice('M426 36'.length)} H0 Z`);
+            meniscus.setAttribute('d', boundary);
+        }
+
+        function animateSurface(now) {
+            surfaceFramePending = false;
+            drawSurface(reducedMotion.matches ? 0 : now - shownAt);
+            startSurface();
+        }
+
+        function startSurface() {
+            if (surfaceFramePending || reducedMotion.matches || surfaceStrength === 0
+                    || wrapper.classList.contains('loaded')) return;
+            surfaceFramePending = true;
+            requestAnimationFrame(animateSurface);
+        }
+
+        drawSurface(0);
+        startSurface();
+        reducedMotion.addEventListener?.('change', () => {
+            if (reducedMotion.matches) drawSurface(0);
+            else startSurface();
+        });
+        // The tired page shares the animation without ever revealing content.
+        if (wrapper.dataset.loaderMode === 'persistent') return;
+        // Page loading has no reliable percentage: stay indeterminate until load.
+        const fluid = part('supercritical');
+        const bubbles = part('bubbles');
+        const cloud = part('cloud');
         const minimumDisplay = 2000;
         const transitionDuration = 1000;
         const gradientHold = 200;
@@ -95,6 +154,8 @@
         function renderTransition(amount) {
             const blend = amount * amount * (3 - 2 * amount);
             const remaining = 1 - blend;
+            surfaceStrength = remaining;
+            if (remaining === 0) drawSurface(0);
             fluid.setAttribute('opacity', blend);
             meniscus.setAttribute('opacity', remaining * remaining);
             bubbles.setAttribute('opacity', remaining);
